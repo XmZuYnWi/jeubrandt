@@ -34,14 +34,14 @@
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script>
     const message = document.getElementById("reader-message");
-
+    
     function onScanSuccess(decodedText) {
       message.innerText = "QR Code détecté ✅ Redirection...";
 
       html5QrCode.stop().then(() => {
-        // Add your GitHub repo path if QR contains only file name
-        const repoName = "/jeubrandt"; // <-- Replace with your repo
-        let path = decodedText.startsWith("http") ? decodedText : jeubrandt + "/" + decodedText;
+        // Trim spaces and remove leading slash if present
+        const fileName = decodedText.trim().replace(/^\/+/, '');
+        const path = window.location.origin + repoName + '/' + fileName;
         window.location.href = path;
       }).catch(err => {
         console.error("Erreur lors de l'arrêt du scanner :", err);
@@ -49,12 +49,11 @@
     }
 
     function onScanFailure(error) {
-      // ignore
+      // ignore scan errors
     }
 
     const html5QrCode = new Html5Qrcode("qr-reader");
 
-    // Use facingMode: environment for back camera
     Html5Qrcode.getCameras().then(cameras => {
       if (cameras && cameras.length) {
         html5QrCode.start(
@@ -63,7 +62,7 @@
           onScanSuccess,
           onScanFailure
         ).catch(err => {
-          message.innerText = "❌ Impossible d'accéder à la caméra";
+          message.innerText = "❌ Impossible de démarrer le scanner";
           console.error(err);
         });
       } else {
@@ -76,4 +75,6 @@
   </script>
 </body>
 </html>
+
+
 
