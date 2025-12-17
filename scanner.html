@@ -34,22 +34,19 @@
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script>
     const message = document.getElementById("reader-message");
-    
+
     function onScanSuccess(decodedText) {
       message.innerText = "QR Code détecté ✅ Redirection...";
-
       html5QrCode.stop().then(() => {
-        // Trim spaces and remove leading slash if present
-        const fileName = decodedText.trim().replace(/^\/+/, '');
-        const path = window.location.origin + repoName + '/' + fileName;
-        window.location.href = path;
+        // Redirect directly to the scanned URL
+        window.location.href = decodedText.trim();
       }).catch(err => {
         console.error("Erreur lors de l'arrêt du scanner :", err);
       });
     }
 
     function onScanFailure(error) {
-      // ignore scan errors
+      // Ignore scan errors
     }
 
     const html5QrCode = new Html5Qrcode("qr-reader");
@@ -75,6 +72,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
