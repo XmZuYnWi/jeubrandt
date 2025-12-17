@@ -40,8 +40,8 @@
 
       html5QrCode.stop().then(() => {
         // Add your GitHub repo path if QR contains only file name
-        const repoName = "/REPO_NAME"; // <-- Replace with your repo
-        let path = decodedText.startsWith("http") ? decodedText : repoName + "/" + decodedText;
+        const repoName = "/jeubrandt"; // <-- Replace with your repo
+        let path = decodedText.startsWith("http") ? decodedText : jeubrandt + "/" + decodedText;
         window.location.href = path;
       }).catch(err => {
         console.error("Erreur lors de l'arrêt du scanner :", err);
@@ -76,3 +76,4 @@
   </script>
 </body>
 </html>
+
