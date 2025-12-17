@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inscription - Le Défi Brandt</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Roboto', sans-serif;
       display: flex;
@@ -22,119 +15,65 @@
       color: #fff;
       text-align: center;
     }
-
     .form-container {
       background: rgba(255, 255, 255, 0.1);
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
       width: 100%;
       max-width: 400px;
     }
-
-    h1 {
-      font-size: 2.5em;
+    input, button {
       margin-bottom: 15px;
-      letter-spacing: 1.5px;
-    }
-
-    p {
-      font-size: 1.2em;
-      margin-bottom: 25px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      font-size: 1em;
-      margin-bottom: 5px;
-      text-align: left;
-    }
-
-    input {
       padding: 10px;
       font-size: 1em;
-      margin-bottom: 20px;
       border-radius: 5px;
-      border: 1px solid #ddd;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-
-    input:focus {
-      border-color: #d81010;
-    }
-
-    .submit-button {
-      background-color: #e01919;
-      color: #fff;
       border: none;
-      padding: 15px;
-      font-size: 1em;
-      border-radius: 50px;
+      outline: none;
+    }
+    button {
+      background-color: #e01919;
+      color: white;
       cursor: pointer;
-      transition: background-color 0.3s, transform 0.3s;
+      border-radius: 50px;
+      font-size: 1.1em;
     }
-
-    .submit-button:hover {
+    button:hover {
       background-color: #e61919;
-      transform: translateY(-3px);
-    }
-
-    footer {
-      font-size: 0.9em;
-      margin-top: 20px;
     }
   </style>
 </head>
-
 <body>
   <div class="form-container">
     <h1>Inscription</h1>
     <p>Veuillez remplir le formulaire pour participer au défi.</p>
-    <form id="inscriptionForm">
-      <label for="firstName">Prénom *</label>
-      <input type="text" id="firstName" name="firstName" placeholder="Entrez votre prénom" required />
 
-      <label for="lastName">Nom *</label>
-      <input type="text" id="lastName" name="lastName" placeholder="Entrez votre nom" required />
+    <input type="text" id="firstName" placeholder="Prénom" required>
+    <input type="text" id="lastName" placeholder="Nom" required>
+    <input type="tel" id="phoneNumber" placeholder="Numéro de téléphone" pattern="[0-9]{10}" required>
 
-      <label for="phoneNumber">Numéro de téléphone *</label>
-      <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Entrez votre numéro" required pattern="[0-9]{10}" />
-
-      <button type="button" class="submit-button" onclick="submitForm()">Soumettre</button>
-    </form>
-    <footer>
-      © Brandt Algérie — Jeu promotionnel 2025
-    </footer>
+    <button onclick="submitForm()">Soumettre</button>
   </div>
 
   <script>
     function submitForm() {
-      // Get form values
       const firstName = document.getElementById('firstName').value.trim();
       const lastName = document.getElementById('lastName').value.trim();
       const phoneNumber = document.getElementById('phoneNumber').value.trim();
 
-      // Validate required fields
       if (!firstName || !lastName || !phoneNumber) {
-        alert("Veuillez remplir tous les champs requis.");
+        alert("Veuillez remplir tous les champs.");
         return;
       }
 
-      // Save in localStorage for win.html PDF
+      // Save to localStorage for win.html PDF
       localStorage.setItem('firstName', firstName);
       localStorage.setItem('lastName', lastName);
       localStorage.setItem('phoneNumber', phoneNumber);
 
-      // Redirect to hint.html (first hint page)
+      // Redirect to first hint page
       window.location.href = 'hint.html';
     }
   </script>
 </body>
-
 </html>
 
