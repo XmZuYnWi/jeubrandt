@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inscription - Le Défi Brandt</title>
   <style>
-    /* General resets */
     * {
       margin: 0;
       padding: 0;
@@ -96,7 +95,7 @@
   <div class="form-container">
     <h1>Inscription</h1>
     <p>Veuillez remplir le formulaire pour participer au défi.</p>
-    <form action="indise.html" method="POST">
+    <form id="inscriptionForm">
       <label for="firstName">Prénom *</label>
       <input type="text" id="firstName" name="firstName" placeholder="Entrez votre prénom" required />
 
@@ -106,21 +105,36 @@
       <label for="phoneNumber">Numéro de téléphone *</label>
       <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Entrez votre numéro" required pattern="[0-9]{10}" />
 
-<button type="button" class="submit-button" onclick="
-  localStorage.setItem('firstName', document.getElementById('firstName').value);
-  localStorage.setItem('lastName', document.getElementById('lastName').value);
-  localStorage.setItem('phoneNumber', document.getElementById('phoneNumber').value);
-  location.href='hint.html';
-">Soumettre</button>
-
-
+      <button type="button" class="submit-button" onclick="submitForm()">Soumettre</button>
     </form>
     <footer>
-
       © Brandt Algérie — Jeu promotionnel 2025
     </footer>
   </div>
+
+  <script>
+    function submitForm() {
+      // Get form values
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const phoneNumber = document.getElementById('phoneNumber').value.trim();
+
+      // Validate required fields
+      if (!firstName || !lastName || !phoneNumber) {
+        alert("Veuillez remplir tous les champs requis.");
+        return;
+      }
+
+      // Save in localStorage for win.html PDF
+      localStorage.setItem('firstName', firstName);
+      localStorage.setItem('lastName', lastName);
+      localStorage.setItem('phoneNumber', phoneNumber);
+
+      // Redirect to hint.html (first hint page)
+      window.location.href = 'hint.html';
+    }
+  </script>
 </body>
 
-
 </html>
+
